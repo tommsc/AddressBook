@@ -1,9 +1,7 @@
 namespace AddressBook.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    using System.Data.Entity.Spatial;
-    
+
     public partial class RenameCoords : DbMigration
     {
         public override void Up()
