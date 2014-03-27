@@ -112,6 +112,14 @@
     <Compile Include="Migrations\201403271716242_First-Database.Designer.cs">
       <DependentUpon>201403271716242_First-Database.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201403271800096_Added-DbGeography.cs" />
+    <Compile Include="Migrations\201403271800096_Added-DbGeography.Designer.cs">
+      <DependentUpon>201403271800096_Added-DbGeography.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201403271818173_Rename-Coords.cs" />
+    <Compile Include="Migrations\201403271818173_Rename-Coords.Designer.cs">
+      <DependentUpon>201403271818173_Rename-Coords.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\AddressRepository.cs" />
@@ -134,6 +142,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201403271716242_First-Database.resx">
       <DependentUpon>201403271716242_First-Database.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201403271800096_Added-DbGeography.resx">
+      <DependentUpon>201403271800096_Added-DbGeography.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201403271818173_Rename-Coords.resx">
+      <DependentUpon>201403271818173_Rename-Coords.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
