@@ -5,14 +5,14 @@ namespace AddressBook.Migrations
     using Models;
     using System.Data.Entity.Spatial;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<AddressContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<AddressBookContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(AddressContext context)
+        protected override void Seed(AddressBookContext bookContext)
         {
             var addresses = new List<Address> 
             {
@@ -22,8 +22,8 @@ namespace AddressBook.Migrations
                 new Address { Id = 4, Name = "Guri", Street = "Høyåsvegen 8", Zip = "3919", City = "Porsgrunn"          , Location = DbGeography.FromText("POINT(010.7524889 59.9140000)", 4326) },
             };
 
-            addresses.ForEach(c => context.Address.AddOrUpdate(a => a.Id, c));
-            context.SaveChanges();
+            addresses.ForEach(c => bookContext.Address.AddOrUpdate(a => a.Id, c));
+            bookContext.SaveChanges();
         }
     }
 }

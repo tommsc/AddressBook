@@ -1,5 +1,6 @@
 ﻿using System.Data.Entity;
 using System.Data.Entity.Spatial;
+using System.Diagnostics;
 
 namespace AddressBook.Models
 {
@@ -14,8 +15,12 @@ namespace AddressBook.Models
         public DbGeography Location { get; set; }
     }
 
-    public class AddressContext : DbContext
+    public class AddressBookContext : DbContext
     {
+        public AddressBookContext()
+        {
+            Debug.Write(Database.Connection.ConnectionString);
+        }
         public DbSet<Address> Address { get; set; }
     }
 

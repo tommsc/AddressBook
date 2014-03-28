@@ -6,11 +6,11 @@ namespace AddressBook.Models
 {
     public class AddressRepository : IAddressRepository
     {
-        readonly AddressContext _db;
+        readonly AddressBookContext _db;
  
         public AddressRepository()
         {
-            _db = new AddressContext();
+            _db = new AddressBookContext();
         }
  
         public IEnumerable<Address> GetAll()
