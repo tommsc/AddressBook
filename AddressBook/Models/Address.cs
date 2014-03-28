@@ -12,7 +12,7 @@ namespace AddressBook.Models
         public string City { get; set; }
         public string Zip { get; set; }
         public string Country { get; set; }
-        public DbGeography Location { get; set; }
+        public DbGeography Location { get; set; } 
     }
 
     public class AddressBookContext : DbContext
