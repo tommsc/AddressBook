@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Mvc;
 using AddressBook.Models;
 
 namespace AddressBook.Controllers
 {
-    public class AddressController : ApiController
+    public class AddressController : Controller
     {
         static readonly IAddressRepository Addresses = new AddressRepository();
  
@@ -21,7 +22,18 @@ namespace AddressBook.Controllers
         //    _addresses = repository;
         //}
         #endregion
- 
+
+        public ActionResult Index()
+        {
+            ViewBag.TimeNow = DateTime.Now.ToString("yyyy-MM-dd");
+            return View();
+        }
+
+        public ActionResult List()
+        {
+            var data = Addresses.GetAll();
+            return View(data);
+        }
         // Get all addresses
         public IEnumerable<Address> Get()
         {
@@ -38,35 +50,36 @@ namespace AddressBook.Controllers
             }
             catch (Exception ex)
             {
-                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound, ex.Message));
+                var response = new HttpResponseMessage(HttpStatusCode.NotFound)
+                {
+                    Content = new StringContent(ex.Message),
+                    ReasonPhrase = "Id not found"
+                };
+                throw new HttpResponseException(response); // Request.CreateResponse(HttpStatusCode.NotFound, ex.Message));
             }
         }
  
         // Insert Address
-        public HttpResponseMessage Post(Address value)
+        public void /*HttpResponseMessage*/ Post(Address value)
         {
             try
             {
-                if (!ModelState.IsValid)
-                    return Request.CreateResponse(HttpStatusCode.InternalServerError, "Model state is invalid");
+                //if (!ModelState.IsValid)
+                //    return Request.CreateResponse(HttpStatusCode.InternalServerError, "Model state is invalid");
  
                 Address address = Addresses.Add(value);
-                var response = Request.CreateResponse(HttpStatusCode.Created, address);
- 
-                // TODO: Check if the location is useful?
-                string uri = Url.Link("DefaultApi", new {id = value.Id});
-                response.Headers.Location = new Uri(uri);
-               
-                return response;
+                //var response = Request.CreateResponse(HttpStatusCode.Created, address);
+                 //return response;
             }
             catch (Exception ex)
             {
-                return Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message);
+                throw;
+                //return Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
         }
  
         // Update Address by id
-        public HttpResponseMessage Put(int id, Address value)
+        public /*HttpResponseMessage*/ void Put(int id, Address value)
         {
             try
             {
@@ -77,13 +90,14 @@ namespace AddressBook.Controllers
             }
             catch (Exception ex)
             {
-                return Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message);
+                throw;
+                //return Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
-            return Request.CreateResponse(HttpStatusCode.OK);
+           // return Request.CreateResponse(HttpStatusCode.OK);
         }
  
         // Delete Address by id
-        public HttpResponseMessage Delete(int id)
+        public /*HttpResponseMessage*/ void Delete(int id)
         {
             try
             {
@@ -91,9 +105,10 @@ namespace AddressBook.Controllers
             }
             catch (Exception ex)
             {
-                return Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message);
+                throw;
+                //return Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
-            return Request.CreateResponse(HttpStatusCode.OK);
+            //return Request.CreateResponse(HttpStatusCode.OK);
         }
     }
 }
